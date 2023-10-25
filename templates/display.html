@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="en">
+        <title>WordExplorer</title>
+
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="../static/display-styles.css">
+
+        <!-- Font Awesome Script -->
+        <script src="https://kit.fontawesome.com/4b92c18dda.js" crossorigin="anonymous"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            <section id="title-section">
+                <nav>
+                    <div class="title"> <a href="/"> WordExplorer </a> </div>
+                </nav>
+            </section>
+            <section id="form-section">
+                <form method="POST" novalidate>
+                    <input type="text" id="search-bar" name="search" required>
+                    <button type="submit" id="search-button">
+                        Search
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </section>
+            <section id="definitions-section">
+                <h2 class="word">{{ word }}</h2>
+                <div class="all-info">
+                    {% for key, value in data.items(): %}
+                        {% if value != []: %}
+                            <div class="info">
+                                <h4>{{ key.title() }}</h4>
+                                <ol>
+                                    {% for word_data in value: %}
+                                        <li>
+                                            <p class="definition"> {{ word_data["definition"] }} </p>
+                                            {% if "example" in word_data: %}
+                                                <p class="example"><span>-</span> {{ word_data["example"] }}</p>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ol>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

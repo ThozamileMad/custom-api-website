@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>WordExplorer</title>
+
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="../static/dictionary-styles.css">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+        <!-- Font Awesome Scripts -->
+        <script src="https://kit.fontawesome.com/4b92c18dda.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <main>
+            <section id="title-section">
+                <div class="title-block">
+                    <a href="/"> <h1 class="title">WordExplorer</h1> </a>
+                    <p>Find any definition for every word in the English dictionary</p>
+                </div>
+            </section>
+            <section id="search-section">
+                <form method="POST" novalidate>
+                    <input type="text" id="search-bar" name="search" required>
+                    <button type="submit" id="search-button">
+                        Search
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </section>
+            <section id="random-words-section">
+                <div class="all-words">
+                    {% for word in words[:-1]: %}
+                        <a class="word-link" href="{{ url_for('display', word=word) }}">
+                            <div class="word">
+                                <h2>{{ word }}</h2>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
