@@ -33,6 +33,11 @@
             </section>
             <section id="definitions-section">
                 <h2 class="word">{{ word }}</h2>
+                <div class="info-buts">
+                    <a class="definition-but smaller-a" href="{{ url_for('display', word=word) }}"> Definitions </a>
+                    <a class="synonym-but smaller-a inactive" href="{{ url_for('display_synonyms', word=word) }}"> Synonyms </a>
+                    <a class="antonym-but smaller-a inactive" href="{{ url_for('display_antonyms', word=word) }}"> Antonyms </a>
+               </div>
                 <div class="all-info">
                     {% for key, value in data.items(): %}
                         {% if value != []: %}
