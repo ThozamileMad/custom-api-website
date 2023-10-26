@@ -1,4 +1,5 @@
 from requests import get
+from bs4 import BeautifulSoup
 
 
 def get_data(word):
@@ -23,6 +24,19 @@ def get_data(word):
                     lst.extend(modified_data[part_of_speech])
                     modified_data[part_of_speech] = lst
     return modified_data
+
+
+def get_synonym_antonym(word):
+    url = f"https://www.thesaurus.com/browse/{word}"
+    response = get(url)
+    html_string = response.text
+
+    soup = BeautifulSoup(html_string, "html.parser")
+    synonyms = [a_tag.text for a_tag in soup.select("section.ULFYcLlui2SL1DTZuWLn a")]
+    antonyms = [a_tag.text for a_tag in soup.select(".q7ELwPUtygkuxUXXOE9t~.q7ELwPUtygkuxUXXOE9t a")]
+    synonyms_antonyms = {"synonyms": synonyms, "antonyms": antonyms}
+    return synonyms_antonyms
+    
 
 # get_data("bad")
 
