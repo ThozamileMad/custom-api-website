@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="en">
+        <title>WordExplorer</title>
+
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="../static/display-antonym-styles.css">
+
+        <!-- Font Awesome Script -->
+        <script src="https://kit.fontawesome.com/4b92c18dda.js" crossorigin="anonymous"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            <section id="title-section">
+                <nav>
+                    <div class="title"> <a href="/"> WordExplorer </a> </div>
+                </nav>
+            </section>
+            <section id="form-section">
+                <form method="POST" novalidate>
+                    <input type="text" id="search-bar" name="search" required>
+                    <button type="submit" id="search-button">
+                        Search
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </section>
+            <section id="synonyms-section">
+                <h2 class="word">{{ word }}</h2>
+                <div class="info-buts">
+                    <a class="definition-but smaller-a inactive" href="{{ url_for('display', word=word) }}"> Definitions </a>
+                    <a class="synonym-but smaller-a inactive" href="{{ url_for('display_synonyms', word=word) }}"> Synonyms </a>
+                    <a class="antonym-but smaller-a" href="{{ url_for('display_antonyms', word=word) }}"> Antonyms </a>
+               </div>
+                <div class="all-info">
+                    {% if data != []: %}
+                        {% for sub_string in data: %}
+                            <a class="info smaller-a" href="{{ url_for('display', word=sub_string) }}">{{ sub_string }}</a>
+                        {% endfor %}
+                    {% else: %}
+                        <p>Sorry: no antonyms found in thesaurus.</p>
+                    {% endif %}
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
